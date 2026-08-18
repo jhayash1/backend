@@ -23,7 +23,7 @@ dotenv.config();
 const app = express();
 app.use(
   cors({
-    origin: "https://frontend-e-commerce-lac.vercel.app/", 
+    origin: "https://frontend-e-commerce-lac.vercel.app",
     credentials: true,
   }),
 );
