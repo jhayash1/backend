@@ -36,16 +36,16 @@ export const login = async (req, res) => {
         expiresIn: "1h",
       },
     );
-    res.cookie("token",token , {
-      httpOnly:true,
-      secure:true,
-       sameSite: "none",
-  maxAge: 60 * 60 * 1000,
-    })
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: true,
+      sameSite: "none",
+      maxAge: 60 * 60 * 1000,
+    });
 
     return res.status(200).json({
       success: true,
-      message: "Login Successful"
+      message: "Login Successful",
     });
   } catch (error) {
     console.error("Login Error:", error);
@@ -55,7 +55,7 @@ export const login = async (req, res) => {
       message: "Login failed",
     });
   }
-}
+};
 
 export const register = async (req, res) => {
   try {
@@ -68,10 +68,7 @@ export const register = async (req, res) => {
     }
 
     const existingUser = await User.findOne({
-      $or: [
-        { email },
-        { username },
-      ],
+      $or: [{ email }, { username }],
     });
 
     if (existingUser) {
@@ -96,7 +93,6 @@ export const register = async (req, res) => {
         email: newUser.email,
       },
     });
-
   } catch (error) {
     console.error("Register Error:", error);
 
@@ -105,4 +101,4 @@ export const register = async (req, res) => {
       message: "Registration failed",
     });
   }
-}
+};

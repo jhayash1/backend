@@ -23,7 +23,7 @@ dotenv.config();
 const app = express();
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: "https://frontend-e-commerce-lac.vercel.app/",
     credentials: true,
   }),
 );
@@ -35,8 +35,6 @@ connectDB()
 
 // Create a hashed password (normally this comes from your database)
 const hashedPassword = await bcrypt.hash("1234567", 10);
-console.log("KEY ID:", process.env.RAZORPAY_KEY_ID);
-console.log("SECRET EXISTS:", !!process.env.RAZORPAY_KEY_SECRET);
 const razorpay = new Razorpay({
   key_id: process.env.RAZORPAY_KEY_ID,
   key_secret: process.env.RAZORPAY_KEY_SECRET,
