@@ -14,7 +14,11 @@ import cookieParser from "cookie-parser";
 import nodemailer from "nodemailer";
 import profileRoutes from "./routes/profileRoutes.js";
 import authRoutes from "./routes/authRoutes.js";
+import connectDB from "./db/db.js";
+import dns from "dns";
+dns.setServers(["8.8.8.8", "1.1.1.1"]);
 dotenv.config();
+
 
 const app = express();
 app.use(
@@ -27,14 +31,7 @@ app.use(
 app.use(cookieParser());
 app.use(express.json());
 
-mongoose
-  .connect(process.env.MONGODB_URI)
-  .then(() => {
-    console.log("MongoDB connected successfully");
-  })
-  .catch((error) => {
-    console.error("MongoDB connection failed:", error);
-  });
+connectDB()
 
 // Create a hashed password (normally this comes from your database)
 const hashedPassword = await bcrypt.hash("1234567", 10);
